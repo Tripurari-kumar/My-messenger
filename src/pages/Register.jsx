@@ -19,6 +19,7 @@ import { formData } from './registerData';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import axios from 'axios';
 import { config } from '../utils/config';
+import { isEmpty } from 'lodash';
 
 function Register() {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function Register() {
   const [isFieldValuesValid, setIsFieldValuesValid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const loggedInInformation = localStorage.getItem('messenger-app-user');
   const [toastobj, setToastObj] = useState({
     open: false,
     isError: false,
@@ -81,6 +83,12 @@ function Register() {
       navigate('/');
     }
   };
+
+  useEffect(() => {
+    if (!isEmpty(loggedInInformation)) {
+      navigate('/');
+    }
+  }, []);
 
   useEffect(() => {
     let re =
@@ -163,6 +171,7 @@ function Register() {
       return showConfirmPassword ? 'text' : 'password';
     }
   };
+
   const handleClose = () => {
     setToastObj((prevState) => {
       return { ...prevState, open: false };
@@ -174,7 +183,6 @@ function Register() {
       <Snackbar
         open={toastobj?.open}
         autoHideDuration={3000}
-        //action={action}
         onClose={handleClose}
       >
         <Alert severity={toastobj?.isError ? 'error' : 'success'}>
