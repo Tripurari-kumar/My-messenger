@@ -80,13 +80,13 @@ function Register() {
         password: '',
         confirmPassword: '',
       });
-      navigate('/');
+      navigate('/profile');
     }
   };
 
   useEffect(() => {
     if (!isEmpty(loggedInInformation)) {
-      navigate('/');
+      navigate('/profile');
     }
   }, []);
 

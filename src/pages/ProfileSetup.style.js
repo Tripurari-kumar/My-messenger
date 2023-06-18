@@ -1,0 +1,112 @@
+/* eslint-disable import/no-anonymous-default-export */
+export default {
+  outerWrapper: { height: '100vh', width: '100%', position: 'absolute' },
+  innerWrapper: {
+    height: '80vh',
+    width: '80%',
+    position: 'absolute',
+    top: '10vh',
+    left: '10%',
+    borderRadius: '20px',
+  },
+  profileInfo: {
+    height: '80vh',
+    width: '40%',
+    position: 'absolute',
+    top: '10vh',
+    left: '50%',
+    borderRadius: '20px',
+    backgroundColor: '#fff',
+  },
+  fileUpload: {
+    margin: 'auto',
+    border: '1px solid #ccc',
+    display: 'flex',
+    width: '150px',
+    height: '150px',
+    borderRadius: '100%',
+    cursor: 'pointer',
+  },
+  profileWrapper: {
+    zIndex: '10',
+    position: 'absolute',
+    left: '25%',
+    top: '30%',
+  },
+  profileImg: {
+    heigh: '150px',
+    width: '150px',
+    borderRadius: '50%',
+  },
+  editProfile: {
+    backgroundColor: 'transparent',
+    border: '1px solid',
+    borderColor: 'background.default',
+    color: 'background.default',
+    borderRadius: '20px',
+    marginTop: '114px',
+    marginLeft: '-143px',
+  },
+  editText: {
+    color: 'background.default',
+    width: '250px',
+    marginTop: '20px',
+    marginLeft: '-47px',
+    display: 'table',
+    textAlign: 'center',
+  },
+  logoSection: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  logo: {
+    color: '#1E6D58',
+    height: '50px',
+    fontWeight: '800',
+    fontSize: '20px',
+    fontFamily: 'Cursive',
+  },
+  calenderField: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '20px',
+  },
+  calender: {
+    marginLeft: '20px',
+  },
+  dateTitle: {
+    fontSize: '18px',
+    fontWeight: '500',
+    color: '#000000',
+  },
+  email: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textAreaWrapper: {
+    mb: 2,
+    mt: 3,
+  },
+  aboutContainer: {
+    width: '75%',
+  },
+  saveBtnWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  saveBtn: {
+    color: '#fff',
+    padding: '10px',
+    mt: 1,
+    backgroundColor: '#1E6D58',
+    marginRight: '70px',
+  },
+  aboutArea: {
+    padding: '10px',
+  },
+};
