@@ -6,6 +6,7 @@ import Picker from 'emoji-picker-react';
 import { isEmpty } from 'lodash';
 import axios from 'axios';
 import { config } from '../../utils/config';
+import moment from 'moment';
 
 function Contacts({ contacts, currentUser }) {
   console.log(contacts, currentUser);
@@ -69,6 +70,34 @@ function Contacts({ contacts, currentUser }) {
     }
   }, [activeContact]);
 
+  const getTimeStamp = (allMessages, message, index) => {
+    if (index === allMessages?.length - 1) {
+      if (message?.fromSelf) {
+        return (
+          <p className='response-time time'>
+            {' '}
+            {moment(message?.sentTime).fromNow()}
+          </p>
+        );
+      } else {
+        return <p className='time'> {moment(message?.sentTime).fromNow()}</p>;
+      }
+    } else if (index > 0) {
+      if (allMessages?.[index + 1]?.fromSelf !== message?.fromSelf) {
+        if (message?.fromSelf) {
+          return (
+            <p className='response-time time'>
+              {' '}
+              {moment(message?.sentTime).fromNow()}
+            </p>
+          );
+        } else {
+          return <p className='time'> {moment(message?.sentTime).fromNow()}</p>;
+        }
+      }
+    }
+  };
+
   return (
     <div className='wrapper'>
       <div className='container'>
@@ -125,81 +154,49 @@ function Contacts({ contacts, currentUser }) {
             ></i>
           </div>
           <div className='messages-chat'>
-            {/* <div className='message'>
-              <div
-                className='photo'
-                style={{
-                  backgroundImage: ` url(${activeContact?.avatarImage})`,
-                }}
-              >
-                <div className='online'></div>
-              </div>
-              <p className='text'> Hi, how are you ? </p>
-            </div>
-            <div className='message text-only'>
-              <p className='text'>
-                {' '}
-                What are you doing tonight ? Want to go take a drink ?
-              </p>
-            </div> */}
-            {/* <p className='time'> 14h58</p> */}
             {allMessages?.map((message, index) => {
               if (message?.fromSelf) {
                 return (
-                  <div className='message text-only'>
-                    <div className='response'>
-                      <p className='text'> {message?.message}</p>
+                  <>
+                    <div className='message text-only'>
+                      <div className='response'>
+                        <p className='text'> {message?.message}</p>
+                      </div>
                     </div>
-                  </div>
+                    {getTimeStamp(allMessages, message, index)}
+                  </>
                 );
               } else if (
                 allMessages?.[index - 1]?.fromSelf === false &&
                 message?.fromSelf === false
               ) {
                 return (
-                  <div className='message text-only'>
-                    <p className='text'> {message?.message}</p>
-                  </div>
+                  <>
+                    <div className='message text-only'>
+                      <p className='text'> {message?.message}</p>
+                    </div>
+                    {getTimeStamp(allMessages, message, index)}
+                  </>
                 );
               } else {
                 return (
-                  <div className='message'>
-                    <div
-                      className='photo'
-                      style={{
-                        backgroundImage: ` url(${activeContact?.avatarImage})`,
-                      }}
-                    >
-                      <div className='online'></div>
+                  <>
+                    <div className='message'>
+                      <div
+                        className='photo'
+                        style={{
+                          backgroundImage: ` url(${activeContact?.avatarImage})`,
+                        }}
+                      >
+                        <div className='online'></div>
+                      </div>
+                      <p className='text'> {message?.message} </p>
                     </div>
-                    <p className='text'> {message?.message} </p>
-                  </div>
+                    {getTimeStamp(allMessages, message, index)}
+                  </>
                 );
               }
             })}
-            {/* <div className='message text-only'>
-              <div className='response'>
-                <p className='text'> Hey Megan ! It's been a while 😃</p>
-              </div>
-            </div>
-            <div className='message text-only'>
-              <div className='response'>
-                <p className='text'> When can we meet ?</p>
-              </div>
-            </div>
-            <p className='response-time time'> 15h04</p>
-            <div className='message'>
-              <div
-                className='photo'
-                style={{
-                  backgroundImage: ` url(${activeContact?.avatarImage})`,
-                }}
-              >
-                <div className='online'></div>
-              </div>
-              <p className='text'> 9 pm at the bar if possible 😳</p>
-            </div>
-            <p className='time'> 15h09</p> */}
           </div>
           <div className='footer-chat'>
             <i className='icon' aria-hidden='true'>

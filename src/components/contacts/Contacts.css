@@ -201,6 +201,7 @@
 
 .chat {
   width: 100%;
+  overflow-y: scroll;
 }
 
 .header-chat {
