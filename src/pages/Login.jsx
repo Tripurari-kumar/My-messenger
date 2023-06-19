@@ -32,7 +32,6 @@ function Login() {
     isError: false,
     msg: '',
   });
-  const loggedInInformation = localStorage.getItem('messenger-app-user');
 
   const handleFormInputs = (event, id) => {
     setFormState((prevState) => {
@@ -42,6 +41,12 @@ function Login() {
   const handleClickShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    if (!isEmpty(localStorage.getItem('messenger-app-user'))) {
+      navigate('/');
+    }
+  }, []);
 
   useEffect(() => {
     if (!formState?.userName || !formState?.password) {
@@ -77,15 +82,13 @@ function Login() {
         password: '',
         confirmPassword: '',
       });
-      navigate('/');
+      if (!data?.user?.isAvatarImageSet) {
+        navigate('/profile');
+      } else {
+        navigate('/');
+      }
     }
   };
-
-  useEffect(() => {
-    if (!isEmpty(loggedInInformation)) {
-      navigate('/');
-    }
-  }, []);
 
   const handleClose = () => {
     setToastObj((prevState) => {

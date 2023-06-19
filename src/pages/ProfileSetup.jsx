@@ -38,10 +38,16 @@ function ProfileSetup() {
   });
   const loggedInInformation = localStorage.getItem('messenger-app-user');
   const userData = JSON.parse(loggedInInformation);
-  const isDataSet = userData?.isSet;
+
   useEffect(() => {
     if (isEmpty(loggedInInformation)) {
       navigate('/login');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userData?.isAvatarImageSet) {
+      navigate('/');
     }
   }, []);
 
@@ -237,29 +243,23 @@ function ProfileSetup() {
               </LocalizationProvider>
             </Box>
             <Box sx={styles.textAreaWrapper}>
-              {isDataSet ? (
-                <FormControl sx={styles.aboutContainer}>
-                  <TextareaAutosize
-                    data-testid='box-change'
-                    style={{ textAlign: 'left' }}
-                    hintText='Message Field'
-                    maxLength={255}
-                    sx={styles.aboutArea}
-                    value={profileData?.about || ''}
-                    placeholder='About You.'
-                    onChange={(e) => {
-                      handleChange(e, 'input');
-                    }}
-                    floatingLabelText='MultiLine and FloatingLabel'
-                    minRows={5}
-                    maxRows={7}
-                  />
-                </FormControl>
-              ) : (
-                <Typography variant='h6' sx={{ mt: 1 }}>
-                  {userData?.about}
-                </Typography>
-              )}
+              <FormControl sx={styles.aboutContainer}>
+                <TextareaAutosize
+                  data-testid='box-change'
+                  style={{ textAlign: 'left' }}
+                  hintText='Message Field'
+                  maxLength={255}
+                  sx={styles.aboutArea}
+                  value={profileData?.about || ''}
+                  placeholder='About You.'
+                  onChange={(e) => {
+                    handleChange(e, 'input');
+                  }}
+                  floatingLabelText='MultiLine and FloatingLabel'
+                  minRows={5}
+                  maxRows={7}
+                />
+              </FormControl>
             </Box>
             <Box sx={styles.saveBtnWrapper}>
               <CustomButton
