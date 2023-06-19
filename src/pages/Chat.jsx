@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { config } from '../utils/config';
+import React, { useEffect, useRef, useState } from 'react';
+import { config, host } from '../utils/config';
 import axios from 'axios';
 import { isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import Contacts from '../components/contacts/Contacts';
+import { io } from 'socket.io-client';
 
 function Chat() {
+  const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState();
   const [currentUser, setCurrentUser] = useState();
@@ -19,6 +21,13 @@ function Chat() {
       setCurrentUser(JSON.parse(localStorage.getItem('messenger-app-user')));
     }
   }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      socket.current = io(host);
+      socket.current.emit('add-user', currentUser._id);
+    }
+  }, [currentUser]);
 
   const getAllusers = async () => {
     const { data } = await axios.get(
@@ -39,7 +48,9 @@ function Chat() {
     }
   }, [currentUser]);
 
-  return <Contacts contacts={contacts} currentUser={currentUser} />;
+  return (
+    <Contacts contacts={contacts} currentUser={currentUser} socket={socket} />
+  );
 }
 
 export default Chat;

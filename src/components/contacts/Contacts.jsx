@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import SendIcon from '@mui/icons-material/Send';
 import './Contacts.css';
@@ -8,11 +8,12 @@ import axios from 'axios';
 import { config } from '../../utils/config';
 import moment from 'moment';
 
-function Contacts({ contacts, currentUser }) {
+function Contacts({ contacts, currentUser, socket }) {
   console.log(contacts, currentUser);
-
+  const scrollRef = useRef();
   const [activeContact, setActiveContact] = useState();
   const [msg, setMsg] = useState('');
+  const [arrivalMessage, setArrivalMessage] = useState(null);
   const [allMessages, setAllMessages] = useState([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
@@ -34,7 +35,32 @@ function Contacts({ contacts, currentUser }) {
       message: msg,
       sentTime: new Date().toString(),
     });
+    socket.current.emit('send-msg', {
+      from: currentUser?._id,
+      to: activeContact?._id,
+      message: msg,
+      sentTime: new Date().toString(),
+    });
+    const msgs = [...allMessages];
+    msgs.push({ fromSelf: true, message: msg });
+    setAllMessages(msgs);
   };
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on('msg-recieve', (msg) => {
+        setArrivalMessage({ fromSelf: false, message: msg });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage && setAllMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behaviour: 'smooth' });
+  }, [allMessages]);
 
   const sendChat = (event) => {
     event.preventDefault();
@@ -157,30 +183,30 @@ function Contacts({ contacts, currentUser }) {
             {allMessages?.map((message, index) => {
               if (message?.fromSelf) {
                 return (
-                  <>
+                  <div ref={scrollRef}>
                     <div className='message text-only'>
                       <div className='response'>
                         <p className='text'> {message?.message}</p>
                       </div>
                     </div>
                     {getTimeStamp(allMessages, message, index)}
-                  </>
+                  </div>
                 );
               } else if (
                 allMessages?.[index - 1]?.fromSelf === false &&
                 message?.fromSelf === false
               ) {
                 return (
-                  <>
+                  <div ref={scrollRef}>
                     <div className='message text-only'>
                       <p className='text'> {message?.message}</p>
                     </div>
                     {getTimeStamp(allMessages, message, index)}
-                  </>
+                  </div>
                 );
               } else {
                 return (
-                  <>
+                  <div ref={scrollRef}>
                     <div className='message'>
                       <div
                         className='photo'
@@ -193,7 +219,7 @@ function Contacts({ contacts, currentUser }) {
                       <p className='text'> {message?.message} </p>
                     </div>
                     {getTimeStamp(allMessages, message, index)}
-                  </>
+                  </div>
                 );
               }
             })}
