@@ -1,21 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import SendIcon from '@mui/icons-material/Send';
-import './Contacts.css';
+import './chatBox.css';
 import Picker from 'emoji-picker-react';
 import { isEmpty } from 'lodash';
 import axios from 'axios';
 import { config } from '../../utils/config';
 import moment from 'moment';
+import { sortedContactsAccToTime } from '../../utils/sortingUtility/sortingUtlity';
+import Logo from '../../assets/logo.jpeg';
 
-function Contacts({ contacts, currentUser, socket }) {
-  console.log(contacts, currentUser);
+function ChatBox({ contacts, currentUser, socket, userData }) {
   const scrollRef = useRef();
   const [activeContact, setActiveContact] = useState();
   const [msg, setMsg] = useState('');
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [allMessages, setAllMessages] = useState([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [allLastMsgs, setAllLastMsgs] = useState([]);
+  const [sortedContacts, setSortedContacts] = useState([]);
 
   const handleEmojiPickerhideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
@@ -27,6 +30,19 @@ function Contacts({ contacts, currentUser, socket }) {
     message += event.emoji;
     setMsg(message);
   };
+
+  const getAllLastMsgs = async () => {
+    const { data } = await axios.get(
+      `${config.getAllLastMessagesRoutes}/${userData?._id}`
+    );
+    return data;
+  };
+
+  useEffect(() => {
+    getAllLastMsgs().then((result) => {
+      setAllLastMsgs(result);
+    });
+  }, [allMessages]);
 
   const handleSendMsg = async (msg) => {
     await axios.post(config.sendMessageRoutes, {
@@ -97,8 +113,6 @@ function Contacts({ contacts, currentUser, socket }) {
     }
   }, [activeContact]);
 
-  console.log(allMessages);
-
   const getTimeStamp = (allMessages, message, index) => {
     if (index === allMessages?.length - 1) {
       if (message?.fromSelf) {
@@ -127,17 +141,38 @@ function Contacts({ contacts, currentUser, socket }) {
     }
   };
 
+  const getlastMsgByUserid = (id) => {
+    return allLastMsgs?.find((item) => item?.id === id)?.message;
+  };
+
+  const getLastMsgTimeLap = (id) => {
+    return allLastMsgs?.find((item) => item?.id === id)?.sentTime
+      ? moment(allLastMsgs?.find((item) => item?.id === id)?.sentTime).fromNow()
+      : '';
+  };
+
+  useEffect(() => {
+    sortedContactsAccToTime(
+      allLastMsgs,
+      currentUser,
+      contacts,
+      setSortedContacts
+    );
+  }, [allLastMsgs]);
+
   return (
     <div className='wrapper'>
       <div className='container'>
         <div className='discussions'>
-          <div className='discussion search'>
-            <div className='searchbar'>
-              <i className='fa fa-search' aria-hidden='true'></i>
-              <input type='text' placeholder='Search...'></input>
-            </div>
+          <div className='logoHeader'>
+            <img
+              src={Logo}
+              style={{ height: '80px', width: '80px' }}
+              alt={'logo'}
+            />
+            <span>FREE CHAT (Contacts)</span>
           </div>
-          {contacts?.map((contact, key) => {
+          {sortedContacts?.map((contact, key) => {
             return (
               <div
                 className={
@@ -157,11 +192,11 @@ function Contacts({ contacts, currentUser, socket }) {
                 </div>
                 <div className='desc-contact'>
                   <p className='name'>{contact?.userName}</p>
-                  <p className='message'>
-                    Let's meet for a coffee or something today ?
-                  </p>
+                  <p className='message'>{getlastMsgByUserid(contact?._id)} </p>
                 </div>
-                <div className='timer'>3 min</div>
+                {getLastMsgTimeLap(contact?._id) && (
+                  <div className='timer'>{getLastMsgTimeLap(contact?._id)}</div>
+                )}
               </div>
             );
           })}
@@ -258,4 +293,4 @@ function Contacts({ contacts, currentUser, socket }) {
   );
 }
 
-export default Contacts;
+export default ChatBox;

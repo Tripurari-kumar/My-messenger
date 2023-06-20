@@ -7,4 +7,5 @@ export const config = {
   getAllContacts: `${host}/api/auth/allUsers`,
   sendMessageRoutes: `${host}/api/messages/addmsg`,
   getAllMessagesRoutes: `${host}/api/messages/getmsg`,
+  getAllLastMessagesRoutes: `${host}/api/messages/allLastMsgs`,
 };

@@ -3,8 +3,8 @@ import { config, host } from '../utils/config';
 import axios from 'axios';
 import { isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
-import Contacts from '../components/contacts/Contacts';
 import { io } from 'socket.io-client';
+import ChatBox from '../components/chatBox/chatBox';
 
 function Chat() {
   const socket = useRef();
@@ -49,7 +49,12 @@ function Chat() {
   }, [currentUser]);
 
   return (
-    <Contacts contacts={contacts} currentUser={currentUser} socket={socket} />
+    <ChatBox
+      contacts={contacts}
+      currentUser={currentUser}
+      socket={socket}
+      userData={userData}
+    />
   );
 }
 
