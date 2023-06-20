@@ -1,5 +1,6 @@
 .wrapper {
   background-color: #f5f5f5;
+  background-image: url(../../assets/chatBoxBackground.gif);
   height: 100vh;
   width: 100%;
   display: flex;

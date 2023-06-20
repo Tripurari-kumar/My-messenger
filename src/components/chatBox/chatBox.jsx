@@ -19,6 +19,7 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [allLastMsgs, setAllLastMsgs] = useState([]);
   const [sortedContacts, setSortedContacts] = useState([]);
+  // const msgNode = document.getElementById('add-message');
 
   const handleEmojiPickerhideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
@@ -57,6 +58,7 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
       message: msg,
       sentTime: new Date().toString(),
     });
+
     const msgs = [...allMessages];
     msgs.push({ fromSelf: true, message: msg });
     setAllMessages(msgs);
@@ -81,12 +83,30 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
 
   const sendChat = (event) => {
     event.preventDefault();
+
     setShowEmojiPicker(false);
     if (msg.length > 0) {
       handleSendMsg(msg);
       setMsg('');
     }
   };
+
+  // useEffect(() => {
+  //   if (msgNode) {
+  //     msgNode.addEventListener('keyup', function (event) {
+  //       event.preventDefault();
+  //       console.log(event);
+  //       if (event.key === 'Enter') {
+  //         console.log('hi');
+  //         setShowEmojiPicker(false);
+  //         if (msg.length > 0) {
+  //           handleSendMsg(msg);
+  //           setMsg('');
+  //         }
+  //       }
+  //     });
+  //   }
+  // }, [msgNode]);
 
   const onContactClick = (contact) => {
     setActiveContact(contact);
@@ -275,6 +295,7 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
 
             <input
               type='text'
+              id='add-message'
               className='write-message'
               placeholder='Type your message here'
               onChange={(e) => setMsg(e.target.value)}
