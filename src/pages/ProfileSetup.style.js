@@ -8,6 +8,7 @@ export default {
     top: '10vh',
     left: '10%',
     borderRadius: '20px',
+    boxShadow: 'rgba(42, 63, 77, 0.75) 10px 10px 16px -4px',
   },
   profileInfo: {
     height: '80vh',

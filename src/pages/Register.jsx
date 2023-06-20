@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   TextField,
-  Container,
   Box,
   Link,
   InputAdornment,
   IconButton,
   Snackbar,
   Alert,
+  Container,
 } from '@mui/material';
 import styles from './Register.style';
 import CustomButton from '../components/common/button/button';
@@ -197,7 +197,7 @@ function Register() {
           style={{ height: '100vh', width: '100%', position: 'absolute' }}
           alt={'logo-gif'}
         />
-        <Container maxWidth='sm' sx={styles.container}>
+        <Container sx={styles.container}>
           <img
             src={Logo}
             style={{ height: '250px', width: '250px' }}

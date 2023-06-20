@@ -49,10 +49,11 @@ function Contacts({ contacts, currentUser, socket }) {
   useEffect(() => {
     if (socket.current) {
       socket.current.on('msg-recieve', (msg) => {
+        console.log(msg);
         setArrivalMessage({ fromSelf: false, message: msg });
       });
     }
-  }, []);
+  });
 
   useEffect(() => {
     arrivalMessage && setAllMessages((prev) => [...prev, arrivalMessage]);
@@ -95,6 +96,8 @@ function Contacts({ contacts, currentUser, socket }) {
       });
     }
   }, [activeContact]);
+
+  console.log(allMessages);
 
   const getTimeStamp = (allMessages, message, index) => {
     if (index === allMessages?.length - 1) {
