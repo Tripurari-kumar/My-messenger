@@ -47,7 +47,6 @@ function Chat() {
       }
     }
   }, [currentUser]);
-  console.log(currentUser);
 
   return (
     <ChatBox
