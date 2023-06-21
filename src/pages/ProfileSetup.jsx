@@ -13,7 +13,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import avatar from '../assets/profile.png';
 import styles from './ProfileSetup.style';
-import ProfileBackground from '../assets/profileBackground.jpg';
+import ProfileBackground from '../assets/profileBackGround.jpg';
+import ProfileBackCover from '../assets/profileBackCover.jpg';
 import CustomButton from '../components/common/button/button';
 import Logo from '../assets/logo.jpeg';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -27,7 +28,7 @@ import moment from 'moment';
 function ProfileSetup() {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
-    dateOfBirth: new Date().toString(),
+    dateOfBirth: new Date(),
     about: '',
   });
   const [postImage, setPostImage] = useState({ myFile: '' });
@@ -77,7 +78,6 @@ function ProfileSetup() {
         myFile: base64,
       };
     });
-    console.log(typeof base64);
   };
 
   const onSaveClick = async () => {
@@ -90,11 +90,11 @@ function ProfileSetup() {
       }
     );
     if (data?.isSet) {
-      userData.isAvatarImageSet = true;
+      userData.isAvatarImageSet = postImage?.myFile ? true : false;
       userData.avatarImage = data?.image;
       userData.dateOfBirth = data?.dateOfBirth;
       userData.about = data?.about;
-      userData.isDataSet = true;
+      userData.isDataSet = postImage?.myFile ? true : false;
       localStorage.setItem('messenger-app-user', JSON.stringify(userData));
       navigate('/');
     } else {
@@ -157,7 +157,7 @@ function ProfileSetup() {
       </Snackbar>
       <Box sx={styles.wrapper}>
         <img
-          src={ProfileBackground}
+          src={ProfileBackCover}
           style={styles.outerWrapper}
           alt={'profile'}
         />
@@ -187,7 +187,7 @@ function ProfileSetup() {
             variant='whiteOutlined'
             id={'edit-profile'}
             sx={styles.editProfile}
-            text={'Edit Profile'}
+            text={postImage?.myFile ? 'Edit Profile Pic' : 'Upload Profile Pic'}
             onClick={onEditClick}
             size='small'
           />
@@ -246,7 +246,7 @@ function ProfileSetup() {
               <FormControl sx={styles.aboutContainer}>
                 <TextareaAutosize
                   data-testid='box-change'
-                  style={{ textAlign: 'left' }}
+                  style={{ textAlign: 'left', padding: '10px 20px' }}
                   hintText='Message Field'
                   maxLength={255}
                   sx={styles.aboutArea}
@@ -265,7 +265,11 @@ function ProfileSetup() {
               <CustomButton
                 variant='contained'
                 sx={styles.saveBtn}
-                text={'Save Changes'}
+                text={
+                  profileData?.about || postImage?.myFile
+                    ? 'Save Changes'
+                    : 'Skip'
+                }
                 size='small'
                 onClick={onSaveClick}
               />

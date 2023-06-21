@@ -35,9 +35,12 @@ export default {
     top: '30%',
   },
   profileImg: {
-    heigh: '150px',
+    height: '150px',
     width: '150px',
     borderRadius: '50%',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
   },
   editProfile: {
     backgroundColor: 'transparent',
@@ -46,7 +49,8 @@ export default {
     color: 'background.default',
     borderRadius: '20px',
     marginTop: '114px',
-    marginLeft: '-143px',
+    marginLeft: '-148px',
+    textTransform: 'none',
   },
   editText: {
     color: 'background.default',
@@ -67,7 +71,7 @@ export default {
     height: '50px',
     fontWeight: '800',
     fontSize: '20px',
-    fontFamily: 'Cursive',
+    fontFamily: `Montserrat', sans-serif`,
   },
   calenderField: {
     display: 'flex',
@@ -104,7 +108,7 @@ export default {
     color: '#fff',
     padding: '10px',
     mt: 1,
-    backgroundColor: '#1E6D58',
+    backgroundColor: '#1E90FF',
     marginRight: '70px',
   },
   aboutArea: {

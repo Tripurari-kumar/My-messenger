@@ -20,6 +20,7 @@ export default {
     zIndex: '999',
     height: '600px',
     width: '450px',
+    boxShadow: 'rgba(42, 63, 77, 0.75) 10px 10px 12px 2px',
   },
   loginAskMsg: {
     padding: '10px',
@@ -44,7 +45,7 @@ export default {
     height: '50px',
     fontWeight: '800',
     fontSize: '30px',
-    fontFamily: 'Cursive',
+    fontFamily: `Montserrat', sans-serif`,
   },
   logoIcon: {
     width: '300px',
@@ -56,5 +57,11 @@ export default {
   },
   logoContainer: {
     display: 'flex',
+  },
+  snackbar: {
+    zIndex: '10',
+  },
+  alert: {
+    zIndex: '10',
   },
 };

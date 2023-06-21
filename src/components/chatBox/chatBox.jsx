@@ -9,9 +9,14 @@ import { config } from '../../utils/config';
 import moment from 'moment';
 import { sortedContactsAccToTime } from '../../utils/sortingUtility/sortingUtlity';
 import Logo from '../../assets/logo.jpeg';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import CustomButton from '../common/button/button';
+import { useNavigate } from 'react-router-dom';
+import Modal from '../common/modal/modal';
 
 function ChatBox({ contacts, currentUser, socket, userData }) {
   const scrollRef = useRef();
+  const navigate = useNavigate();
   const [activeContact, setActiveContact] = useState();
   const [msg, setMsg] = useState('');
   const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -19,6 +24,7 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [allLastMsgs, setAllLastMsgs] = useState([]);
   const [sortedContacts, setSortedContacts] = useState([]);
+  const [openmodal, setOpenModal] = useState(false);
   // const msgNode = document.getElementById('add-message');
 
   const handleEmojiPickerhideShow = () => {
@@ -180,8 +186,39 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
     );
   }, [allLastMsgs]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('messenger-app-user');
+    navigate('/login');
+  };
+
   return (
     <div className='wrapper'>
+      <Modal
+        open={openmodal}
+        desc={'Are you sure you want to Logout'}
+        btnText2='Logout'
+        btnText1='Cancel'
+        handleClose={() => {
+          setOpenModal(false);
+        }}
+        handleContinue={() => handleLogout()}
+      />
+      <div
+        className='profile-icon'
+        style={{
+          backgroundImage: `url(${currentUser?.avatarImage})`,
+        }}
+      ></div>
+      <div className='welcome-text'>{`Welcome ${currentUser?.userName}`}</div>
+      <div className='logout'>
+        <CustomButton
+          variant='contained'
+          sx={{ cursor: 'pointer' }}
+          text={'Logout'}
+          endIcon={<ExitToAppIcon />}
+          onClick={() => setOpenModal(true)}
+        />
+      </div>
       <div className='container'>
         <div className='discussions'>
           <div className='logoHeader'>

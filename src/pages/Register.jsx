@@ -13,13 +13,14 @@ import {
 import styles from './Register.style';
 import CustomButton from '../components/common/button/button';
 import Logo from '../assets/logo.jpeg';
-import RegisterBackGround from '../assets/registerBackground.jpg';
+import RegisterBackGround from '../assets/registerBackground.gif';
 import map from 'lodash/map';
 import { formData } from './registerData';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import axios from 'axios';
 import { config } from '../utils/config';
 import { isEmpty } from 'lodash';
+import zIndex from '@mui/material/styles/zIndex';
 
 function Register() {
   const navigate = useNavigate();
@@ -183,9 +184,13 @@ function Register() {
       <Snackbar
         open={toastobj?.open}
         autoHideDuration={3000}
+        sx={styles.snackbar}
         onClose={handleClose}
       >
-        <Alert severity={toastobj?.isError ? 'error' : 'success'}>
+        <Alert
+          sx={styles.alert}
+          severity={toastobj?.isError ? 'error' : 'success'}
+        >
           {toastobj?.isError
             ? toastobj?.msg
             : 'User has been successfully Registered'}

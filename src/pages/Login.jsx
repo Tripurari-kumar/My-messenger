@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import CustomButton from '../components/common/button/button';
 import Logo from '../assets/logo.jpeg';
-import RegisterBackGround from '../assets/registerBackground.jpg';
+import RegisterBackGround from '../assets/registerBackground.gif';
 import styles from './Login.style';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import axios from 'axios';
@@ -100,10 +100,14 @@ function Login() {
     <>
       <Snackbar
         open={toastobj?.open}
+        sx={styles.snackbar}
         autoHideDuration={3000}
         onClose={handleClose}
       >
-        <Alert severity={toastobj?.isError ? 'error' : 'success'}>
+        <Alert
+          sx={styles.alert}
+          severity={toastobj?.isError ? 'error' : 'success'}
+        >
           {toastobj?.isError
             ? toastobj?.msg
             : 'User has been successfully logged in! '}

@@ -19,5 +19,9 @@ export const sortedContactsAccToTime = (
   }
   reqArray = new Set(reqArray);
   reqArray = Array.from(reqArray);
-  setSortedContacts(reqArray);
+  if (reqArray?.length === 0) {
+    setSortedContacts(contacts);
+  } else {
+    setSortedContacts(reqArray);
+  }
 };
