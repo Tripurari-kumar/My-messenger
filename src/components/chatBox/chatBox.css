@@ -38,6 +38,7 @@
   left: 30px;
   color: #ffffff;
   cursor: pointer;
+  max-width: 300px;
 }
 
 @keyframes welcome-text {
