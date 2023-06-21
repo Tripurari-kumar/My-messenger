@@ -209,7 +209,7 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
           backgroundImage: `url(${currentUser?.avatarImage})`,
         }}
       ></div>
-      <div className='welcome-text'>{`${currentUser?.userName}`}</div>
+      <div className='welcome-text'>{`Hi, ${currentUser?.userName} !`}</div>
       <div className='logout'>
         <CustomButton
           variant='contained'
