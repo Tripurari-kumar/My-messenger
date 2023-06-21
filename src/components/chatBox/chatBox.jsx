@@ -195,7 +195,7 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
     <div className='wrapper'>
       <Modal
         open={openmodal}
-        desc={'Are you sure you want to Logout'}
+        desc={'Are you sure you want to Logout ?'}
         btnText2='Logout'
         btnText1='Cancel'
         handleClose={() => {
@@ -209,7 +209,7 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
           backgroundImage: `url(${currentUser?.avatarImage})`,
         }}
       ></div>
-      <div className='welcome-text'>{`Welcome ${currentUser?.userName}`}</div>
+      <div className='welcome-text'>{`${currentUser?.userName}`}</div>
       <div className='logout'>
         <CustomButton
           variant='contained'

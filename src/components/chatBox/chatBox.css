@@ -20,15 +20,38 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
+
 .welcome-text {
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+  background: #1976d2;
+  padding: 15px 10px;
+  border-radius: 10px;
   position: absolute;
   top: 150px;
   left: 30px;
   color: #ffffff;
-  text-decoration: underline;
-  text-transform: capitalize;
+  cursor: pointer;
 }
+
+@keyframes welcome-text {
+  0% {
+    transform: translate(0, 0px);
+  }
+  50% {
+    transform: translate(0, 15px);
+  }
+  100% {
+    transform: translate(0, -0px);
+  }
+}
+
 .logout {
   z-index: 10;
   top: 30px;
