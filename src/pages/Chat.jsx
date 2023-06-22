@@ -38,13 +38,9 @@ function Chat() {
 
   useEffect(() => {
     if (currentUser) {
-      if (currentUser?.isAvatarImageSet) {
-        getAllusers().then((result) => {
-          setContacts(result);
-        });
-      } else {
-        navigate('/profile');
-      }
+      getAllusers().then((result) => {
+        setContacts(result);
+      });
     }
   }, [currentUser]);
 

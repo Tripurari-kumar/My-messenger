@@ -13,6 +13,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import CustomButton from '../common/button/button';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../common/modal/modal';
+import EmptyProfile from '../../assets/profile.png';
 
 function ChatBox({ contacts, currentUser, socket, userData }) {
   const scrollRef = useRef();
@@ -203,12 +204,17 @@ function ChatBox({ contacts, currentUser, socket, userData }) {
         }}
         handleContinue={() => handleLogout()}
       />
-      <div
-        className='profile-icon'
-        style={{
-          backgroundImage: `url(${currentUser?.avatarImage})`,
-        }}
-      ></div>
+      {currentUser?.avatarImage ? (
+        <div
+          className='profile-icon'
+          style={{
+            backgroundImage: `url(${currentUser?.avatarImage})`,
+          }}
+        />
+      ) : (
+        <img src={EmptyProfile} className='profile-icon' alt='profile-pic' />
+      )}
+
       <div className='welcome-text'>{`Hi, ${currentUser?.userName} !`}</div>
       <div className='logout'>
         <CustomButton
