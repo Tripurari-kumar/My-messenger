@@ -31,5 +31,14 @@ This is a real time chat application which is built using ReactJS, Node.js, Mong
 
   ![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/281c80a9-dfa4-4a62-81f3-65b210396945)
 
+4.  Logout Functionality:- When the user clicks on the logout button, the application prompts for confirmation to ensure the logout action is intentional. This confirmation dialog typically asks the user to confirm their decision to log out, preventing accidental logouts.
+and once the user clicks on logout they are succesfully logged out and routed back to login screen.
+
+logout confirmation:-
+![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/df3d0d7d-da0d-4899-bf35-a04f53a2f76f)
+
+
+
+
 
  
