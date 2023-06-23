@@ -1,4 +1,4 @@
-This is a real time chat application which is built using ReactJS, Node.js, MongoDB, and Socket.io, Here i have an efficient and interactive messaging platform. It includes authentication support and a profile setup feature to enhance the user experience.
+This is a real time chat application which is built using ReactJS, Node.js, MongoDB, and Socket.io, Here i have  made an efficient and interactive messaging platform. It includes authentication support and a profile setup feature to enhance the user experience.
 
 * Key Features
 
