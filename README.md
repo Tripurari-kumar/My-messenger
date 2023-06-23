@@ -20,6 +20,11 @@ This is a real time chat application which is built using ReactJS, Node.js, Mong
 
 
  3.  Real-Time Communication::- The application uses Socket.io, a powerful library that enables real-time, bidirectional communication between the client and server. This ensures instant message delivery and updates, creating a seamless chat experience.
+   
+   Application incorporates a **time-lapse feature** that displays the timestamp of each message, indicating when it was sent or received.
+   also prioritizes the display of the latest incoming messages, ensuring that they are prominently shown to users.
+   Incoming messages are typically positioned at the top of the chat window or conversation thread, making them immediately visible to 
+   users.
 
   Real time chatting:-
   ![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/1df22def-27a1-493a-846b-c9dcf9cdef68)
