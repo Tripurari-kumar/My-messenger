@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+This is a real time chat application which is built using ReactJS, Node.js, MongoDB, and Socket.io, Here i have an efficient and interactive messaging platform. It includes authentication support and a profile setup feature to enhance the user experience.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* Key Features
 
-## Available Scripts
+ 1.  Real-Time Communication::- The application uses Socket.io, a powerful library that enables real-time, bidirectional communication between the client and server. This ensures instant message delivery and updates, creating a seamless chat experience.
 
-In the project directory, you can run:
+  real time chatting:-
+  ![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/1df22def-27a1-493a-846b-c9dcf9cdef68)
 
-### `npm start`
+  ![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/281c80a9-dfa4-4a62-81f3-65b210396945)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. User Authentication:- To ensure secure access, the application incorporates user authentication. Users can create accounts, log in, and log out securely.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ login page/ Register pages:-
+ ![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/6879b7ac-8a74-477e-800f-6f6fa79bbcc5)
 
-### `npm test`
+ ![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/55cd493f-9932-45af-ac71-1b4c8f502301)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Profile Setup: Upon creating an account, users have the option to set up their profiles. They can provide personal information, profile picture, About themseleves, and other relevant details. This allows users to personalize their chat experience and provides a sense of identity within the platform.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ Profile setup:-
+![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/c33c2884-7459-4f31-b7c5-3cc4c073f046)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image](https://github.com/Tripurari-kumar/My-messenger/assets/36576242/38e90e5d-e858-4eb1-b8af-9784ddfb957f)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 
